@@ -27,4 +27,3 @@ f5 - creates the report "externalguests" - runs once a day
 
 f7 - creates the statistics table for PowerBI - runs once a day
 
-
