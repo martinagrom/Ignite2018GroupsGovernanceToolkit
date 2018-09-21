@@ -1,0 +1,19 @@
+{
+  "disabled": false,
+  "bindings": [
+    {
+      "name": "ownerless",
+      "type": "queueTrigger",
+      "direction": "in",
+      "queueName": "ownerless",
+      "connection": "AzureWebJobsStorage"
+    },
+    {
+      "name": "groupsownerless",
+      "type": "table",
+      "direction": "out",
+      "tableName": "groupsownerless",
+      "connection": "AzureWebJobsStorage"
+    }
+  ]
+}

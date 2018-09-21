@@ -1,0 +1,34 @@
+{
+  "disabled": false,
+  "bindings": [
+    {
+      "name": "creategroup",
+      "type": "httpTrigger",
+      "direction": "in",
+      "authLevel": "function",
+      "methods": ["POST"]
+    },
+    {
+      "name": "res",
+      "type": "http",
+      "direction": "out"
+    },
+  {
+    "name": "output",
+    "type": "http",
+    "direction": "out"
+  },
+  {
+    "name": "setclassificationongroup",
+    "queueName": "setclassificationongroup",
+    "type": "queue",
+    "direction": "out"
+  },
+  {
+    "name": "createteam",
+    "queueName": "createteam",
+    "type": "queue",
+    "direction": "out"
+  }  
+]
+}

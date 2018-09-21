@@ -1,0 +1,34 @@
+{
+  "disabled": false,
+  "bindings": [
+    {
+      "name": "externalguests",
+      "type": "queueTrigger",
+      "direction": "in",
+      "queueName": "externalguests",
+      "connection": "AzureWebJobsStorage"
+    },
+    {
+      "name": "sendownermessage",
+      "type": "queue",
+      "direction": "out",
+      "queueName": "sendownermessage",
+      "connection": "AzureWebJobsStorage"
+    },
+    {
+      "name": "groupsmembers",
+      "type": "table",
+      "direction": "out",
+      "tableName": "groupsmembers",
+      "connection": "AzureWebJobsStorage"
+    }
+    ,
+    {
+      "name": "groupsguests",
+      "type": "table",
+      "direction": "out",
+      "tableName": "groupsguests",
+      "connection": "AzureWebJobsStorage"
+    }
+  ]
+}

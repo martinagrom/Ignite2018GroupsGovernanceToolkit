@@ -1,0 +1,19 @@
+{
+  "disabled": false,
+  "bindings": [
+    {
+      "name": "onegroup",
+      "type": "queueTrigger",
+      "direction": "in",
+      "queueName": "onegroup",
+      "connection": "AzureWebJobsStorage"
+    },
+    {
+        "name": "groupsstatistics",
+        "type": "table",
+        "direction": "out",
+        "tableName": "groupsstatistics",
+        "connection": "AzureWebJobsStorage"
+      }
+  ]
+}

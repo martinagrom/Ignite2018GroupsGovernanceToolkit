@@ -1,0 +1,12 @@
+{
+  "disabled": false,
+  "bindings": [
+    {
+      "name": "createteam",
+      "type": "queueTrigger",
+      "direction": "in",
+      "queueName": "createteam",
+      "connection": "AzureWebJobsStorage"
+    }
+  ]
+}
