@@ -5,7 +5,7 @@
 # https://docs.microsoft.com/en-us/azure/active-directory/active-directory-accessmanagement-groups-settings-cmdlets
 # September 2018, atwork.at. Script by Christoph Wilfing, Martina Grom, Toni Pohl
 
-# Connect to you Azure AD
+# Connect to your Azure AD
 Connect-AzureAD
 
 # Create the template
