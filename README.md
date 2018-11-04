@@ -3,7 +3,7 @@ Groups Governance Toolkit
 
 Demos for Ignite18 by atwork.at
 
-Contributors: [Christoph Wilfing](https://twitter.com/cwilfing), [Toni Pohl](https://twitter.com/atwork), [Martina Grom] (https://twitter.com/magrom)
+Contributors: [Christoph Wilfing](https://twitter.com/cwilfing), [Toni Pohl](https://twitter.com/atwork), [Martina Grom](https://twitter.com/magrom)
 
 
 ## Description
