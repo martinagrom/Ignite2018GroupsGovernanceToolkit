@@ -3,13 +3,13 @@ Groups Governance Toolkit
 
 Demos for Ignite18 by atwork.at
 
-Contributors: Christoph Wilfing @CWilfing, Toni Pohl @atwork, Martina Grom @magrom
+Contributors: [Christoph Wilfing](https://twitter.com/cwilfing), [Toni Pohl](https://twitter.com/atwork), [Martina Grom] (https://twitter.com/magrom)
 
 
 ## Description
 These code samples include a bunch of Azure Function PowerShell scripts for groups governance in an Office 365 tenant.
 The functions require an app in the Azure Actice Directory with permissions to read and write users and groups in the Microsoft Graph provider and the tenant id. These information must be present in the App Settings of the Function App in the keys AppId, AppSecret and TenantID. Access to Azure Table Storage and queues is provided by the bindings. Some functions execute a Logic App for further processing.
-See more about the How-To and the functionality at [blog.atwork.at](http://blog.atwork.at/) end of September.
+See more about the How-To and the functionality at [blog.atwork.at](https://blog.atwork.at/).
 
 
 ## Quick overview
