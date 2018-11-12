@@ -59,6 +59,8 @@ Initialize-Authorization -TenantID $env:TenantID -ClientKey $env:AppSecret -AppI
 # Make email address safe...
 $EMail = $GroupInfo.GroupName.Trim().Replace(" ","-")
 
+$enableTeam = $GroupInfo.enableteam.trim().tolower()
+
 $Body = [PSCustomObject]@{
     "displayname"     = "$($GroupInfo.GroupName)"
     "mailenabled"     = $true
@@ -140,6 +142,46 @@ if ($GroupInfo.classification) {
 #endregion
 
 #-------------------------------------------
+#region Add resourceProvisioningOptions
+#TODO move team part to createteam 
+#-------------------------------------------
+$body = [PSCustomObject]@{
+    resourceProvisioningOptions = {@("Workflow")}.Invoke()
+}
+if ($enableTeam -eq 'yes' -or $enableTeam -eq 'true') {
+    $body.resourceProvisioningOptions.Add("Team")
+}
+$BodyJson = $Body | ConvertTo-Json
+Write-Output $BodyJson
+try {
+    $result = Invoke-RestMethod `
+        -Method Patch `
+        -Uri "https://graph.microsoft.com/beta/groups/$GroupID" `
+        -ContentType 'application/json' `
+        -Headers $script:APIHeader `
+        -Body $BodyJson `
+        -ErrorAction Stop
+    
+    Write-Output "resourceProvisioningOptions set"
+}
+catch [System.Net.WebException] {
+    $result = $_.Exception.Response.GetResponseStream()
+    $reader = New-Object System.IO.StreamReader($result)
+    $responseBody = $reader.ReadToEnd() | ConvertFrom-Json
+
+    $Request = $_.Exception
+    Write-Output "Exception caught: $Request"
+    
+    throw "CreateGroup: ErrorCode: [$($responseBody.error.message)] | [$($responseBody.error.details.ToString())]"
+}
+catch {
+    Write-Output "CreateGroup: Another Exception caught: [$($_.Exception)]"
+    throw "CreateGroup: Another Exception caught: [$($_.Exception)]"
+}
+
+#endregion
+
+#-------------------------------------------
 #region get the user by UPN
 #-------------------------------------------
 try {
@@ -208,8 +250,8 @@ catch {
 #-------------------------------------------
 #region Create Team on top of the group
 #-------------------------------------------
-Write-Output "Enable Team: $($GroupInfo.enableteam.trim().tolower())"
-if ($GroupInfo.enableteam.trim().tolower() -eq 'yes') {
+
+if ($enableTeam -eq 'yes' -or $enableTeam -eq 'true') {
     $TeamInfo = [PSCustomObject]@{
         GroupID = $GroupID
     }
