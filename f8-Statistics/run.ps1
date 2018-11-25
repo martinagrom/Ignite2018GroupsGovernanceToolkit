@@ -86,9 +86,9 @@ try {
         -ContentType 'application/json' `
         -Headers $script:APIHeader
 
-        # if we get an id, then the group is a team.
-    #Write-Output "onegroup: isTeam: [$($teamresult.value.id)]"
-    if ($teamresult.value.id) { $isTeam = "Yes" }
+    # Updated Nov. 2018: If we get an id, we can check the providerName to see the group type.
+    Write-Output "onegroup: isTeam: [$($teamresult.value.providerName)]"
+    if ($teamresult.value.id) { $isTeam = $teamresult.value.providerName }
 }
 catch [System.Net.WebException] {
     Write-Output "onegroup team: WebException: $($_.exception)"
