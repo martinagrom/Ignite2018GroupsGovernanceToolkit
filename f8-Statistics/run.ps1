@@ -57,7 +57,7 @@ Initialize-Authorization -TenantID $env:TenantID -ClientKey $env:AppSecret -AppI
 #region get group properties
 #-------------------------------------------
 try {
-    $uri = "https://graph.microsoft.com/v1.0/groups/$($onegroup.GroupId)"
+    $uri = "https://graph.microsoft.com/v1.0/groups/$($onegroup.id)"
     Write-Host "query uri $uri"
     $grpresult = Invoke-RestMethod `
         -Method Get `
@@ -78,7 +78,7 @@ catch {
 #-------------------------------------------
 $isTeam = "No"
 try {
-    $uri = "https://graph.microsoft.com/beta/groups/$($onegroup.GroupId)/endpoints"
+    $uri = "https://graph.microsoft.com/beta/groups/$($onegroup.id)/endpoints"
     Write-Host "query uri $uri"
     $teamresult = Invoke-RestMethod `
         -Method Get `
@@ -103,7 +103,7 @@ catch {
 #region check if the group has owners
 #-------------------------------------------
 try {
-    $uri = "https://graph.microsoft.com/v1.0/groups/$($onegroup.GroupId)/owners"
+    $uri = "https://graph.microsoft.com/v1.0/groups/$($onegroup.id)/owners"
     Write-Host "query uri $uri"
     $ownerresult = Invoke-RestMethod `
         -Method Get `
@@ -124,7 +124,7 @@ catch {
 #-------------------------------------------
 try {
     # We (still) need to use the beta endpoint to get the userType...
-    $uri = "https://graph.microsoft.com/beta/groups/$($onegroup.GroupId)/members"
+    $uri = "https://graph.microsoft.com/beta/groups/$($onegroup.id)/members"
     Write-Host "query uri $uri"
     $membersresult = Invoke-RestMethod `
         -Method Get `
@@ -175,9 +175,10 @@ if ($grpresult.renewedDateTime) { $renewedDateTime = $grpresult.renewedDateTime.
 $TableEntry = [PSObject]@{
     PartitionKey     = 'groupstatistics'
     RowKey           = $(new-guid).Guid
-    GroupDisplayName = $onegroup.GroupDisplayName
-    GroupId          = $onegroup.GroupId
-    GroupMail        = $onegroup.GroupMail
+    GroupDisplayName = $onegroup.displayName
+    GroupId          = $onegroup.id
+#    GroupDescription = $onegroup.description
+    GroupMail        = $onegroup.mail
     GroupOwnerCount  = $ownerresult.value.count
     MembersCount     = $membersresult.value.count
     GuestsCount      = $guests
